@@ -1,0 +1,121 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font Mono";
+    font-size: 13px;
+    font-weight: bold;
+}
+
+window#waybar {
+    background: rgba(15, 15, 23, 0.8);
+    color: #ffffff;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 0, 85, 0.2);
+}
+
+/* Tüm modüller hizalı, aynı dolguya ve geçişe sahip */
+#workspaces, #cpu, #memory, #temperature, #clock, #custom-supergfx, #custom-asus-profile, #network, #pulseaudio, #custom-power, #battery, #custom-power-menu, #tray {
+    background: rgba(45, 45, 60, 0.5);
+    padding: 0 12px;
+    margin: 4px 3px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+/* --- Hover Efektleri --- */
+
+#custom-asus-profile:hover {
+    background: #00f2ff;
+    color: #000;
+    box-shadow: 0 0 12px #00f2ff;
+}
+
+#custom-supergfx:hover {
+    background: #7ef431;
+    color: #000;
+    box-shadow: 0 0 12px #7ef431;
+}
+
+/* Ağ Hover Efektleri */
+#network.wifi:hover {
+    background: #cba6f7;
+    color: #000;
+    box-shadow: 0 0 12px #cba6f7;
+}
+
+#network.ethernet:hover {
+    background: #89b4fa;
+    color: #000;
+    box-shadow: 0 0 12px #89b4fa;
+}
+
+/* Ses ve Mikrofon Efektleri */
+#pulseaudio:hover {
+    background: #89dceb;
+    color: #000;
+    box-shadow: 0 0 12px #89dceb;
+}
+
+#pulseaudio.microphone:hover {
+    background: #f38ba8;
+    color: #000;
+    box-shadow: 0 0 12px #f38ba8;
+}
+
+/* Mikrofon Kapalıykenki Tasarım (Uyarıcı Kırmızı) */
+#pulseaudio.microphone.source-muted {
+    color: #f38ba8;
+    background: rgba(243, 139, 168, 0.1);
+    border: 1px solid rgba(243, 139, 168, 0.4);
+}
+
+/* Hoparlör Sessizdeykenki Tasarım */
+#pulseaudio.muted {
+    color: #a6adc8;
+}
+
+/* Watt Göstergesi */
+#custom-power {
+    color: #f9e2af;
+}
+
+#custom-power:hover {
+    background: #f9e2af;
+    color: #000;
+    box-shadow: 0 0 12px #f9e2af;
+}
+
+/* Güç Butonu */
+#custom-power-menu:hover {
+    background: #ff0055;
+    color: #ffffff;
+    box-shadow: 0 0 12px #ff0055;
+}
+
+#clock {
+    color: #ff0055;
+    background: rgba(255, 0, 85, 0.1);
+    border: 1px solid rgba(255, 0, 85, 0.4);
+}
+
+#workspaces button.active {
+    color: #00f2ff;
+    background: rgba(0, 242, 255, 0.2);
+    box-shadow: inset 0 -2px #00f2ff;
+}
+
+/* Batarya Durumları */
+#battery.charging {
+    color: #a6e3a1; 
+}
+
+#battery.critical:not(.charging) {
+    background-color: #f53c3c;
+    color: #ffffff;
+    animation: blink 0.5s steps(5, start) infinite;
+}
+
+@keyframes blink {
+    to { background-color: rgba(255, 255, 255, 0.1); color: #f53c3c; }
+}

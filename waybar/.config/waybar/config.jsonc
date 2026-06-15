@@ -1,0 +1,139 @@
+{
+    "layer": "top",
+    "position": "top",
+    "mod": "dock",
+    "height": 34,
+    "exclusive": true,
+    "passthrough": false,
+    "gtk-layer-shell": true,
+    "margin-top": 5,
+    "margin-left": 10,
+    "margin-right": 10,
+
+    "modules-left": [
+        "cpu",
+        "memory",
+        "temperature"
+    ],
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+        "custom/supergfx",
+        "custom/asus-profile",
+        "network#ethernet",
+        "network#wifi",
+        "pulseaudio",
+        "pulseaudio#microphone",
+        "custom/power",
+        "battery",
+        "custom/power-menu",
+        "tray"
+    ],
+
+    "cpu": {
+        "interval": 2,
+        "format": "󰻠 {usage}%",
+        "max-length": 10
+    },
+
+    "memory": {
+        "interval": 5,
+        "format": "󰍛 {used:0.1f}G"
+    },
+   "temperature": {
+        "hwmon-path": "/sys/class/hwmon/hwmon7/temp1_input",
+        "critical-threshold": 80,
+        "format": " {temperatureC}°C",
+        "format-icons": ["", "", ""],
+        "tooltip": true
+    },
+
+    "clock": {
+        "interval": 1,
+        "format": "{:%H:%M:%S} 󰥔",
+        "format-alt": "{:%A, %B %d, %Y} 󰃭",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>"
+    },
+
+    "custom/supergfx": {
+        "exec": "supergfxctl -g",
+        "interval": 30,
+        "format": "󰢮 {}",
+        "on-click": "supergfxctl -m Hybrid",
+        "on-click-right": "supergfxctl -m Integrated",
+        "tooltip": true
+    },
+
+    "custom/asus-profile": {
+        "exec": "asusctl profile get | grep 'Active' | awk '{print $NF}'",
+        "interval": 2,
+        "format": "󰈐 {}",
+        "on-click": "asusctl profile next",
+        "tooltip": false
+    },
+
+    "network#wifi": {
+        "interface": "wl*",
+        "format-wifi": " {essid}",
+        "format-disconnected": "", 
+        "format-alt": " {ipaddr}", 
+        "tooltip-format": "Ağ: {essid}\nIP: {ipaddr}/{cidr}\nGeçit: {gwaddr}"
+    },
+
+    "network#ethernet": {
+        "interface": "en*",
+        "format-ethernet": "󰈀 {ifname}",
+        "format-disconnected": "", 
+        "format-alt": "󰈀 {ipaddr}", 
+        "tooltip-format": "Arayüz: {ifname}\nIP: {ipaddr}/{cidr}\nGeçit: {gwaddr}"
+    },
+
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "󰝟 Sessiz",
+        "format-icons": {
+            "default": ["󰕿", "󰖀", "󰕾"]
+        },
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "on-click-right": "pavucontrol",
+        "scroll-step": 5
+    },
+
+    "pulseaudio#microphone": {
+        "format": "{format_source}",
+        "format-source": "󰍬 {volume}%",
+        "format-source-muted": "󰍭 Kapalı",
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+        "on-click-right": "pavucontrol",
+        "scroll-step": 5
+    },
+
+    "custom/power": {
+        "exec": "awk '{ getline status < \"/sys/class/power_supply/BAT0/status\"; if (status == \"Full\" || status == \"Not charging\") exit; printf \"%s%.1f W\\n\", (status == \"Discharging\" ? \"-\" : \"+\"), $1/1000000; }' /sys/class/power_supply/BAT0/power_now 2>/dev/null",
+        "interval": 2,
+        "format": " {}",
+        "tooltip": false
+    },
+
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": "󰂄 {capacity}%",
+        "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+    },
+
+    "custom/power-menu": {
+        "format": "",
+        "on-click": "wlogout",
+        "tooltip": false
+    },
+
+    "tray": {
+        "icon-size": 18,
+        "spacing": 10
+    }
+}

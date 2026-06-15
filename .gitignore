@@ -1,0 +1,4 @@
+# Niri backup dosyaları
+*.save
+*.save.*
+*.bak
