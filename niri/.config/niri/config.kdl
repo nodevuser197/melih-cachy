@@ -282,6 +282,7 @@ environment {
 }
 
 // waybar is managed by systemd (waybar.service) for auto-restart on crash
+spawn-at-startup "swaync"
 spawn-at-startup "blueman-applet"
 spawn-at-startup "swaybg" "-m" "fill" "-i" "/home/melih/dotfiles/wallpaper/wp.jpg"
 spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
@@ -423,8 +424,8 @@ XF86KbdBrightnessDown { spawn "sh" "-c" "asusctl leds get | grep -q 'Off' || asu
     // Example brightness key mappings for brightnessctl.
     // You can use regular spawn with multiple arguments too (to avoid going through "sh"),
     // but you need to manually put each argument in separate "" quotes.
-    XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
-    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
+    XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--device=nvidia_wmi_ec_backlight" "set" "+10%"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--device=nvidia_wmi_ec_backlight" "set" "10%-"; }
 
     // Open/close the Overview: a zoomed-out view of workspaces and windows.
     // You can also move the mouse into the top-left hot corner,
@@ -634,8 +635,8 @@ XF86KbdBrightnessDown { spawn "sh" "-c" "asusctl leds get | grep -q 'Off' || asu
     // Mod+Space       { switch-layout "next"; }
     // Mod+Shift+Space { switch-layout "prev"; }
 
-    Print { screenshot; }
-    Ctrl+Print { screenshot-screen; }
+    Print { spawn "/home/melih/.local/bin/screenshot-region"; }
+    Ctrl+Print { spawn "screenshot-monitor"; }
     Alt+Print { screenshot-window; }
 
     // Applications such as remote-desktop clients and software KVM switches may

@@ -11,6 +11,9 @@
     "margin-right": 10,
 
     "modules-left": [
+        "custom/power-mode",
+        "battery",
+        "custom/power",
         "cpu",
         "memory",
         "temperature"
@@ -20,14 +23,12 @@
     ],
     "modules-right": [
         "custom/supergfx",
-        "custom/asus-profile",
         "network#ethernet",
         "network#wifi",
         "pulseaudio",
         "pulseaudio#microphone",
-        "custom/power",
-        "battery",
         "custom/power-menu",
+        "custom/notification",
         "tray"
     ],
 
@@ -56,6 +57,15 @@
         "tooltip-format": "<tt><small>{calendar}</small></tt>"
     },
 
+    "custom/power-mode": {
+        "exec": "/home/melih/.local/bin/power-mode-status.sh",
+        "interval": 2,
+        "format": "{}",
+        "on-click": "/home/melih/.local/bin/power-mode-toggle.sh",
+        "on-click-right": "/home/melih/.local/bin/power-mode-set.sh oldurucu",
+        "tooltip": false
+    },
+
     "custom/supergfx": {
         "exec": "supergfxctl -g",
         "interval": 30,
@@ -78,7 +88,8 @@
         "format-wifi": " {essid}",
         "format-disconnected": "", 
         "format-alt": " {ipaddr}", 
-        "tooltip-format": "Ağ: {essid}\nIP: {ipaddr}/{cidr}\nGeçit: {gwaddr}"
+        "tooltip-format": "Ağ: {essid}\nIP: {ipaddr}/{cidr}\nGeçit: {gwaddr}",
+        "max-length": 15
     },
 
     "network#ethernet": {
@@ -135,5 +146,22 @@
     "tray": {
         "icon-size": 18,
         "spacing": 10
+    },
+
+    "custom/notification": {
+        "tooltip": false,
+        "format": "{icon}",
+        "format-icons": {
+            "notification": "󰂚",
+            "none": "󰂜",
+            "dnd-notification": "󰂛",
+            "dnd-none": "󰂝"
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
     }
 }

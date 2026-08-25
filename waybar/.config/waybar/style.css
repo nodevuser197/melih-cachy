@@ -14,7 +14,7 @@ window#waybar {
 }
 
 /* Tüm modüller hizalı, aynı dolguya ve geçişe sahip */
-#workspaces, #cpu, #memory, #temperature, #clock, #custom-supergfx, #custom-asus-profile, #network, #pulseaudio, #custom-power, #battery, #custom-power-menu, #tray {
+#workspaces, #cpu, #memory, #temperature, #clock, #custom-supergfx, #custom-asus-profile, #custom-power-mode, #network, #pulseaudio, #custom-power, #battery, #custom-power-menu, #custom-notification, #tray {
     background: rgba(45, 45, 60, 0.5);
     padding: 0 12px;
     margin: 4px 3px;
@@ -29,6 +29,29 @@ window#waybar {
     background: #00f2ff;
     color: #000;
     box-shadow: 0 0 12px #00f2ff;
+}
+
+#custom-power-mode:hover {
+    background: #00f2ff;
+    color: #000;
+    box-shadow: 0 0 12px #00f2ff;
+}
+
+#custom-power-mode.sessiz:hover {
+    background: #a6e3a1;
+    color: #000;
+    box-shadow: 0 0 12px #a6e3a1;
+}
+
+#custom-power-mode.oldurucu {
+    color: #f38ba8;
+    border: 1px solid rgba(243, 139, 168, 0.4);
+}
+
+#custom-power-mode.oldurucu:hover {
+    background: #f38ba8;
+    color: #000;
+    box-shadow: 0 0 12px #f38ba8;
 }
 
 #custom-supergfx:hover {
@@ -84,6 +107,18 @@ window#waybar {
     background: #f9e2af;
     color: #000;
     box-shadow: 0 0 12px #f9e2af;
+}
+
+/* Bildirim */
+#custom-notification:hover {
+    background: #cba6f7;
+    color: #000;
+    box-shadow: 0 0 12px #cba6f7;
+}
+
+#custom-notification.dnd-none,
+#custom-notification.dnd-notification {
+    color: #a6adc8;
 }
 
 /* Güç Butonu */

@@ -1,0 +1,5 @@
+#!/bin/sh
+set -eu
+mkdir -p ~/Pictures/Screenshots
+geom="$(niri msg -j focused-output | jq -r '.logical | "\(.x),\(.y) \(.width)x\(.height)"')"
+grim -g "$geom" - | satty --filename - -o ~/Pictures/Screenshots/satty-"$(date +%Y%m%d-%H%M%S)".png --copy-command wl-copy
